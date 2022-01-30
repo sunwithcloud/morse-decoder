@@ -37,44 +37,36 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
-
 function decode(expr) {
-    let wordsInTable = '';
-    let wordsInString = '';
-    let newString = '';
-    let stringDecoder = '';
-    let keys = 0;
-        for (let key in expr)
+
+  let arrayDecode = [];
+
+  for (let key of expr.match(/[0-9*]{1,10}/g))
+  {
+    if (key === '**********') 
+    {
+      key = arrayDecode.push(" ")
+    } 
+    else 
+    {
+      let letterDecoder = [];
+      const array = key.toString().match(/[0-9*]{1,2}/g)
+      for (let keys of array) 
+      {
+        if (keys === '10') 
         {
-          wordsInString = wordsInString + expr[key] 
-          for (let keys in MORSE_TABLE)
-            {
-              if (expr[key] === MORSE_TABLE[keys])
-                {
-                  console.log(keys + " " + expr[key])
-                  newString = newString + keys;
-                  //console.log(keys.length)
-                }
-            }
+          keys = letterDecoder.push('.');
         }
-          console.log(newString)
-    
-        for (let key in newString)
+        else if (keys === '11')
         {
-          if (newString[key] === '.')
-            {
-              stringDecoder = stringDecoder + '10';
-            } else if (newString[key] === '-') 
-              {
-                stringDecoder = stringDecoder + '11';
-              } else if (newString[key] === '*') 
-                {
-                  stringDecoder = stringDecoder + '*'
-                }
-        }  
-        expr = '';
-        expr = expr + stringDecoder;
-        return expr
+          keys = letterDecoder.push('-');
+        }
+      }
+    let arraySpace = MORSE_TABLE[letterDecoder.join("")];
+    arrayDecode.push(arraySpace);
+    }
+  }
+  return arrayDecode.join('')
 }
 
 module.exports = {
