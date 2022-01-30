@@ -37,12 +37,11 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
-let wordsInTable = '';
-let wordsInString = '';
-let newString = '';
-let stringDecoder = '';
-let keys = 0;
+
 function decode(expr) {
+    let wordsInString = '';
+    let newString = '';
+    let stringDecoder = '';
 
     for (let key in expr)
     {
@@ -51,13 +50,10 @@ function decode(expr) {
         {
           if (expr[key] === MORSE_TABLE[keys])
             {
-              console.log(keys + " " + expr[key])
               newString = newString + keys;
-              //console.log(keys.length)
             }
         }
     }
-      console.log(newString)
 
     for (let key in newString)
     {
@@ -72,7 +68,8 @@ function decode(expr) {
               stringDecoder = stringDecoder + '*'
             }
     }  
-  return expr = expr + stringDecoder;
+  expr = expr + stringDecoder;
+  return expr;
 }
 
 module.exports = {
