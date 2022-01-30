@@ -37,8 +37,42 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
+let wordsInTable = '';
+let wordsInString = '';
+let newString = '';
+let stringDecoder = '';
+let keys = 0;
 function decode(expr) {
-    // write your solution here
+
+    for (let key in expr)
+    {
+      wordsInString = wordsInString + expr[key] 
+      for (let keys in MORSE_TABLE)
+        {
+          if (expr[key] === MORSE_TABLE[keys])
+            {
+              console.log(keys + " " + expr[key])
+              newString = newString + keys;
+              //console.log(keys.length)
+            }
+        }
+    }
+      console.log(newString)
+
+    for (let key in newString)
+    {
+      if (newString[key] === '.')
+        {
+          stringDecoder = stringDecoder + '10';
+        } else if (newString[key] === '-') 
+          {
+            stringDecoder = stringDecoder + '11';
+          } else if (newString[key] === '*') 
+            {
+              stringDecoder = stringDecoder + '*'
+            }
+    }  
+  return expr = expr + stringDecoder;
 }
 
 module.exports = {
