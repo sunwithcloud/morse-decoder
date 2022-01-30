@@ -39,37 +39,42 @@ const MORSE_TABLE = {
 
 
 function decode(expr) {
+    let wordsInTable = '';
     let wordsInString = '';
     let newString = '';
     let stringDecoder = '';
-
-    for (let key in expr)
-    {
-      wordsInString = wordsInString + expr[key] 
-      for (let keys in MORSE_TABLE)
+    let keys = 0;
+        for (let key in expr)
         {
-          if (expr[key] === MORSE_TABLE[keys])
+          wordsInString = wordsInString + expr[key] 
+          for (let keys in MORSE_TABLE)
             {
-              newString = newString + keys;
+              if (expr[key] === MORSE_TABLE[keys])
+                {
+                  console.log(keys + " " + expr[key])
+                  newString = newString + keys;
+                  //console.log(keys.length)
+                }
             }
         }
-    }
-
-    for (let key in newString)
-    {
-      if (newString[key] === '.')
+          console.log(newString)
+    
+        for (let key in newString)
         {
-          stringDecoder = stringDecoder + '10';
-        } else if (newString[key] === '-') 
-          {
-            stringDecoder = stringDecoder + '11';
-          } else if (newString[key] === '*') 
+          if (newString[key] === '.')
             {
-              stringDecoder = stringDecoder + '*'
-            }
-    }  
-  expr = expr + stringDecoder;
-  return expr;
+              stringDecoder = stringDecoder + '10';
+            } else if (newString[key] === '-') 
+              {
+                stringDecoder = stringDecoder + '11';
+              } else if (newString[key] === '*') 
+                {
+                  stringDecoder = stringDecoder + '*'
+                }
+        }  
+        expr = '';
+        expr = expr + stringDecoder;
+        return expr
 }
 
 module.exports = {
